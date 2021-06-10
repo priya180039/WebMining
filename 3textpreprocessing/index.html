@@ -1,0 +1,861 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.7">
+    
+    
+      
+        <title>Text Preprocessing - Web Mining</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ca7ac06f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#text-preprocessing" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Web Mining" class="md-header__button md-logo" aria-label="Web Mining" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Web Mining
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Text Preprocessing
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Web Mining" class="md-nav__button md-logo" aria-label="Web Mining" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Web Mining
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Identitas
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2crawling/" class="md-nav__link">
+        Crawling
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Text Preprocessing
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Text Preprocessing
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#teori-text-preprocessing" class="md-nav__link">
+    Teori Text Preprocessing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#teori-case-folding" class="md-nav__link">
+    Teori Case Folding
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-case-folding" class="md-nav__link">
+    Code Case Folding
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#teori-filtering" class="md-nav__link">
+    Teori Filtering
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-filtering" class="md-nav__link">
+    Code Filtering
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#teori-tokenization" class="md-nav__link">
+    Teori Tokenization
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-tokenization" class="md-nav__link">
+    Code Tokenization
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#teori-stemming" class="md-nav__link">
+    Teori Stemming
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-stemming" class="md-nav__link">
+    Code Stemming
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#teori-stopword-removal" class="md-nav__link">
+    Teori Stopword Removal
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-stopword-removal" class="md-nav__link">
+    Code Stopword Removal
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#teori-reduksi-dimensi" class="md-nav__link">
+    Teori Reduksi Dimensi
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-reduksi-dimensi" class="md-nav__link">
+    Code Reduksi Dimensi
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4modelling/" class="md-nav__link">
+        Modelling
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5evaluasi/" class="md-nav__link">
+        Evaluasi
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#teori-text-preprocessing" class="md-nav__link">
+    Teori Text Preprocessing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#teori-case-folding" class="md-nav__link">
+    Teori Case Folding
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-case-folding" class="md-nav__link">
+    Code Case Folding
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#teori-filtering" class="md-nav__link">
+    Teori Filtering
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-filtering" class="md-nav__link">
+    Code Filtering
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#teori-tokenization" class="md-nav__link">
+    Teori Tokenization
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-tokenization" class="md-nav__link">
+    Code Tokenization
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#teori-stemming" class="md-nav__link">
+    Teori Stemming
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-stemming" class="md-nav__link">
+    Code Stemming
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#teori-stopword-removal" class="md-nav__link">
+    Teori Stopword Removal
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-stopword-removal" class="md-nav__link">
+    Code Stopword Removal
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#teori-reduksi-dimensi" class="md-nav__link">
+    Teori Reduksi Dimensi
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-reduksi-dimensi" class="md-nav__link">
+    Code Reduksi Dimensi
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="text-preprocessing">Text Preprocessing</h1>
+<h3 id="teori-text-preprocessing">Teori Text Preprocessing</h3>
+<p>​       Text Preprocessing adalah tahapan menyeleksi data untuk membuat data yang akan kita proses lebih terstruktur. Tahapan yang biasanya dilakukan ketika melakukan Text Processing adalah sebagai berikut, Case Folding, Filtering, Tokenization, Stemming, Stopword Removal, Reduksi Dimensi.</p>
+<h3 id="teori-case-folding">Teori Case Folding</h3>
+<p>​       Case Folding ini dilakukan ketika adanya kesalahan dalam penulisan huruf kapital sehingga harus dirapihkan agar mudah dalam melakukan pemrosesan text. Untuk merapihkan kesalahan penggunaan huruf kapital itu, maka dalam tahap Case Folding setiap huruf diubah ke lowercase atau huruf kecil. </p>
+<h3 id="code-case-folding">Code Case Folding</h3>
+<pre><code class="language-python">sentences_list = ['Priya Bagus Amanullah adalah mahasiswa yang berasal dari Jakarta.', 'Dia anak pertama dari 3 bersaudara.', 'Dia lulusan dari SMP 84 Jakarta Utara dan SMA 75 Jakarta.', 'Priya Bagus Amanullah sedang menempuh pendidikan kuliah di Universitas Trunojoyo Madura, yang saat ini sedang menjalani semester ke-6 nya.']
+
+sentences_temp = []
+for a in sentences_list:
+    hasil = a.lower()
+    sentences_temp.append(hasil)
+sentences_list = sentences_temp
+print(sentences_list)
+</code></pre>
+<p>Hasil output setelah dilakukannya Case Folding, sebagai berikut:</p>
+<pre><code>['priya bagus amanullah adalah mahasiswa yang berasal dari jakarta.', 'dia anak pertama dari 3 bersaudara.', 'dia lulusan dari smp 84 jakarta utara dan sma 75 jakarta.', 'priya bagus amanullah sedang menempuh pendidikan kuliah di universitas trunojoyo madura, yang saat ini sedang menjalani semester ke-6 nya.']
+</code></pre>
+<h3 id="teori-filtering">Teori Filtering</h3>
+<p>​       Filtering ini dilakukan ketika adanya simbol-simbol atau karakter lain selain huruf sehingga harus dirapihkan agar mudah dalam melakukan pemrosesan text. Untuk merapihkan karakter itu, maka dalam tahap Filtering akan menghilangkan karakter seperti angka atau tanda baca. </p>
+<h3 id="code-filtering">Code Filtering</h3>
+<p>Data melanjutkan dari result Case Folding tadi</p>
+<pre><code class="language-python">import re
+sentences_temp = []
+for i in sentences_list:
+    hasil = re.sub(r&quot;\d+&quot;, &quot;&quot;, i)
+    sentences_temp.append(hasil)
+sentences_list = sentences_temp 
+print(sentences_list)
+</code></pre>
+<p>Hasil output setelah dilakukannya Filtering angka, sebagai berikut:</p>
+<pre><code>['priya bagus amanullah adalah mahasiswa yang berasal dari jakarta.', 'dia anak pertama dari  bersaudara.', 'dia lulusan dari smp  jakarta utara dan sma  jakarta.', 'priya bagus amanullah sedang menempuh pendidikan kuliah di universitas trunojoyo madura, yang saat ini sedang menjalani semester ke- nya.']
+</code></pre>
+<p>Data melanjutkan dari result Filtering angka</p>
+<pre><code class="language-python">import string
+sentences_temp = []
+for i in sentences_list:
+    hasil = i.translate(str.maketrans(&quot;&quot;,&quot;&quot;,string.punctuation))
+    sentences_temp.append(hasil)
+sentences_list = sentences_temp 
+print(sentences_list)
+len(sentences_list)
+</code></pre>
+<p>Hasil output setelah dilakukannya Filtering tanda baca, sebagai berikut:</p>
+<pre><code>['priya bagus amanullah adalah mahasiswa yang berasal dari jakarta', 'dia anak pertama dari  bersaudara', 'dia lulusan dari smp  jakarta utara dan sma  jakarta', 'priya bagus amanullah sedang menempuh pendidikan kuliah di universitas trunojoyo madura yang saat ini sedang menjalani semester ke nya']
+</code></pre>
+<h3 id="teori-tokenization">Teori Tokenization</h3>
+<p>​       Setelah merapihkan isi dokumen pada tahapan Case Folding dan Filtering, sekarang tahapan Tokenization adalah untuk memisahkan setiap kata, dan kata-kata yang telah dipisahkan tersebut disebut token.</p>
+<h3 id="code-tokenization">Code Tokenization</h3>
+<p>Untuk melakukan tokenization ini, kita memerlukan library NLTK pada python. Pertama, install dulu nltk.</p>
+<p><code>C:\Users\Win_10\AppData\Local\Programs\Python\Python39\Scripts&gt;pip install nltk</code></p>
+<p>Lalu install punkt, caranya</p>
+<pre><code class="language-python">import nltk
+nltk.download()
+</code></pre>
+<p>Lalu setelah itu akan muncul window, klik models lalu cari punkt lalu klik download.</p>
+<p>Berikutnya di text editor python</p>
+<p>Data melanjutkan dari result Filtering</p>
+<pre><code class="language-python">temp = ''
+loop = 0
+for sentence in sentences_list:
+    loop += 1
+    temp += sentence
+    if loop &lt; len(sentences_list):
+        temp += ' '
+
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.probability import FreqDist
+
+tokenresult = nltk.tokenize.word_tokenize(temp)
+tokenfreq = nltk.FreqDist(tokenresult)
+print(tokenfreq.most_common())
+</code></pre>
+<p>Hasil output setelah Tokenize dan menghitung frekuensinya, sebagai berikut:</p>
+<pre><code>[('dari', 3), ('jakarta', 3), ('priya', 2), ('bagus', 2), ('amanullah', 2), ('yang', 2), ('dia', 2), ('sedang', 2), ('adalah', 1), ('mahasiswa', 1), ('berasal', 1), ('anak', 1), ('pertama', 1), ('bersaudara', 1), ('lulusan', 1), ('smp', 1), ('utara', 1), ('dan', 1), ('sma', 1), ('menempuh', 1), ('pendidikan', 1), ('kuliah', 1), ('di', 1), ('universitas', 1), ('trunojoyo', 1), ('madura', 1), ('saat', 1), ('ini', 1), ('menjalani', 1), ('semester', 1), ('ke', 1), ('nya', 1)]
+</code></pre>
+<h3 id="teori-stemming">Teori Stemming</h3>
+<p>​       Dilakukan untuk mengubah suatu kata menjadi lebih sederhana yaitu menjadi kata dasar dengan menghilangkan imbuhan prefiks maupun sufiks dan dikelompokkan berdasarkan kata dasar itu.</p>
+<h3 id="code-stemming">Code Stemming</h3>
+<p>Data melanjutkan dari result Filtering sebelumnya</p>
+<pre><code class="language-python">from Sastrawi.Stemmer.StemmerFactory import StemmerFactory# create stemmer
+factory = StemmerFactory()
+stemmer = factory.create_stemmer()
+
+new = []
+for x in sentences_list:
+    tempstem = stemmer.stem(x)
+    new.append(tempstem)
+print(new)
+</code></pre>
+<p>Hasil output yang dihasilkan setelah Stemming, sebagai berikut:</p>
+<pre><code>['priya bagus amanullah adalah mahasiswa yang asal dari jakarta', 'dia anak pertama dari saudara', 'dia lulus dari smp jakarta utara dan sma jakarta', 'priya bagus amanullah sedang tempuh didik kuliah di universitas trunojoyo madura yang saat ini sedang jalan semester ke nya']
+</code></pre>
+<h3 id="teori-stopword-removal">Teori Stopword Removal</h3>
+<p>​       Stopword Removal dilakukan untuk menghilangkan kata-kata yang sekiranya tidak terlalu penting atau tidak terlalu berarti dalam dokumen, dan mengambil kata-kata yang penting. Filter ini dilakukan setelah proses stemming.</p>
+<h3 id="code-stopword-removal">Code Stopword Removal</h3>
+<p>Data dilanjutkan dari result Stemming sebelumnya</p>
+<pre><code class="language-python">from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
+from nltk.tokenize import word_tokenize
+
+factory = StopWordRemoverFactory()
+stopword  = factory.create_stop_word_remover()
+
+dokumen = []
+for y in new:
+    afterRemoval = stopword.remove(y)
+    dokumen.append(afterRemoval)
+print(dokumen)
+</code></pre>
+<p>Hasil output setelah Stopword Removal, sebagai berikut:</p>
+<pre><code>['priya bagus amanullah mahasiswa asal jakarta', 'anak pertama saudara', 'lulus smp jakarta utara sma jakarta', 'priya bagus amanullah sedang tempuh didik kuliah universitas trunojoyo madura saat sedang jalan semester nya']
+</code></pre>
+<h3 id="teori-reduksi-dimensi">Teori Reduksi Dimensi</h3>
+<p>​       Dilakukan ketika kita ingin mengurangi dimensi pada suatu dataset yang ingin kita olah. Saat ada banyak fitur atau kolom, setelah dilakukannya reduksi dimensi maka jumlah fitur atau kolom bisa berkurang tanpa harus kehilangan informasi yang tersedia. Contoh penggunaan tahapan ini juga terdapat saat kita ingin mengkompres file yang sangat besar, saat kita mengkompres file tersebut maka ukurannya akan berkurang tanpa kehilangan informasi yang terdapat pada dalam file tersebut.</p>
+<h3 id="code-reduksi-dimensi">Code Reduksi Dimensi</h3>
+<p>Data melanjutkan dari result Stopword Removal sebelumnya</p>
+<pre><code class="language-python">from sklearn.feature_extraction.text import TfidfTransformer, CountVectorizer
+
+cv = CountVectorizer()
+bag = cv.fit_transform(dokumen)
+matrik_vsm=bag.toarray()
+
+import pandas as pd
+
+a=cv.get_feature_names()
+print(len(cv.get_feature_names()))
+from sklearn.feature_extraction.text import TfidfTransformer
+tfidf = TfidfTransformer(use_idf=True,norm='l2',smooth_idf=True)
+tf=tfidf.fit_transform(cv.fit_transform(dokumen)).toarray()
+
+dfb =pd.DataFrame(data=tf,index=list(range(1, len(tf[:,1])+1, )),columns=[a])
+print(dfb)
+</code></pre>
+<p>Hasil output matriks TF-IDF</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>amanullah</th>
+<th>anak</th>
+<th>asal</th>
+<th>bagus</th>
+<th>didik</th>
+<th>jakarta</th>
+<th>jalan</th>
+<th>kuliah</th>
+<th>lulus</th>
+<th>madura</th>
+<th>...</th>
+<th>saat</th>
+<th>saudara</th>
+<th>sedang</th>
+<th>semester</th>
+<th>sma</th>
+<th>smp</th>
+<th>tempuh</th>
+<th>trunojoyo</th>
+<th>utara</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0.372225</td>
+<td>0.00000</td>
+<td>0.47212</td>
+<td>0.372225</td>
+<td>0.000000</td>
+<td>0.372225</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>...</td>
+<td>0.000000</td>
+<td>0.00000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0.000000</td>
+<td>0.57735</td>
+<td>0.00000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>...</td>
+<td>0.000000</td>
+<td>0.57735</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0.000000</td>
+<td>0.00000</td>
+<td>0.00000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.619130</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.392644</td>
+<td>0.000000</td>
+<td>...</td>
+<td>0.000000</td>
+<td>0.00000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.392644</td>
+<td>0.392644</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.392644</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0.197941</td>
+<td>0.00000</td>
+<td>0.00000</td>
+<td>0.197941</td>
+<td>0.251063</td>
+<td>0.000000</td>
+<td>0.251063</td>
+<td>0.251063</td>
+<td>0.000000</td>
+<td>0.251063</td>
+<td>...</td>
+<td>0.251063</td>
+<td>0.00000</td>
+<td>0.502126</td>
+<td>0.251063</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.251063</td>
+<td>0.251063</td>
+<td>0.000000</td>
+</tr>
+</tbody>
+</table>
+<pre><code>4 rows × 24 columns
+</code></pre>
+<p>Lalu melakukan Reduksi Dimensi menggunakan PCA</p>
+<pre><code class="language-python">from sklearn.decomposition import PCA
+pca = PCA(n_components=2)
+fit_pca = pca.fit_transform(dfb)
+pca_df = pd.DataFrame(data = fit_pca, columns = ['PCA_1', 'PCA_2'])
+pca_df.tail()
+</code></pre>
+<p>Hasil output setelah dilakukannya Reduksi Dimensi</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>PCA_1</th>
+<th>PCA_2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>-0.414373</td>
+<td>-1.025937e-16</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0.892074</td>
+<td>-2.948689e-02</td>
+</tr>
+<tr>
+<td>2</td>
+<td>-0.262446</td>
+<td>-6.919021e-01</td>
+</tr>
+</tbody>
+</table>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../2crawling/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Crawling" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Crawling
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../4modelling/" class="md-footer__link md-footer__link--next" aria-label="Next: Modelling" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Modelling
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.b0710199.min.js", "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.76f349be.min.js"></script>
+      
+    
+  </body>
+</html>
